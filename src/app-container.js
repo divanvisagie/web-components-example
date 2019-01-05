@@ -1,7 +1,7 @@
 import { html } from 'lit-html'
 import { Component } from './component-core/Component'
 
-import css from './AppContainer.css'
+import css from './app-container.css'
 import milligram from 'milligram'
 import LoginPage from './pages/login-page'
 

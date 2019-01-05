@@ -1,2 +1,2 @@
-import './AppContainer'
+import './app-container'
 import 'milligram'
