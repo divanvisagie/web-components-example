@@ -16,7 +16,6 @@ export class Router {
         window.addEventListener('hashchange', (e) => {
             const path = this.getRoute();
             console.log('changing to path', path);
-            this.path = path;
             this.changeCallback(e);
         });
     }
@@ -35,7 +34,7 @@ export class Router {
             else {
                 window.location.hash = '#/login'
             }
-            return
+            return this.routes['/login'].element
         }
         return route.element
     }

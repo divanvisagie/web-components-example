@@ -3,6 +3,7 @@ import { html } from 'lit-html';
 
 import css from './header-component.css'
 import bs from '../../node_modules/bootstrap/dist/css/bootstrap.css'
+import createAuthService from '../services/authService';
 
 export default createComponent('header-component', class extends Component {
     constructor(){
@@ -12,6 +13,12 @@ export default createComponent('header-component', class extends Component {
         }
 
         this.css = bs + css
+
+        this.authService = createAuthService()
+
+        this.setState({
+            authenticated: this.authService.isAuthenticated()
+        })
     }
 
     renderAuthenticated() {

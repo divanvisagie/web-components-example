@@ -2,28 +2,32 @@ import { html } from 'lit-html'
 import { Component } from './component-core/Component'
 
 import css from './app-container.css'
-import milligram from 'milligram'
 import LoginPage from './pages/login-page'
 import HomePage from './pages/home-page'
 import { Router, Route } from './component-core/Router';
+import createAuthService from './services/authService';
 
 
 class AppContainer extends Component {
     constructor() {
         super()
+
+        const authService = createAuthService()
+       
+        this.css = css
+
         this.state = {
             appName: 'Hello',
             name: '',
             page: HomePage
         }
-        this.css = css
 
         const router = new Router({
             '/': new Route(HomePage, true),
             '/login': new Route(LoginPage)
         })
         router.onAuthChallenge(e => {
-            return true
+            return authService.isAuthenticated()
         })
         router.onChange(e => {
             console.log('changing to page')
@@ -31,6 +35,8 @@ class AppContainer extends Component {
                 page: router.getPage()
             })
         })
+
+        
         
     }
 
