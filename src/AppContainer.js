@@ -1,20 +1,39 @@
 import { html } from 'lit-html'
-import { Component } from './Component'
+import { Component } from './component-core/Component'
 
 import css from './AppContainer.css'
 import milligram from 'milligram'
-import LoginForm  from './LoginForm';
+import './pages/login-page'
+
+
+class Router {
+    constructor() {
+        const path = this.getRoute()
+        console.log('current path', path)
+        window.addEventListener('hashchange', (e) => {
+            const path = this.getRoute()
+            console.log('changing to path', path)
+        })
+    }
+
+    getRoute() {
+        return window.location.hash.replace('#','')
+    }
+
+}
+
 
 
 class AppContainer extends Component {
     constructor() {
-        const styling = milligram + css
-        super(styling)
+        super()
         this.state = {
             appName: 'Hello',
             name: ''
         }
-        this.performRender()
+        this.css = css
+
+        const router = new Router()
     }
 
     handleInputChange(event) {
@@ -27,23 +46,10 @@ class AppContainer extends Component {
     render({appName, name}) {
         console.log('render')
         return html`
-            <div class="app-container">
-                <h3>${appName}</h3>
-                <p>
+            <div>
 
-                <span>This app says ${appName}</span>
-                </p>
-                <span> ${name} </span>
-                <form>
-                    <input value="${name}" 
-                        type="text" 
-                        placeholder="Enter Your Name"
-                        @input=${e => this.handleInputChange(e)}
-                    />
-                    <input type="submit">
-                </form>
+                <login-page></login-page>
 
-                ${LoginForm()}
             </div>
         `
     }

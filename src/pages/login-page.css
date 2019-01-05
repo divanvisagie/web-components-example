@@ -1,0 +1,18 @@
+:host {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.jumbotron {
+    padding: 16px;
+    /* background: #eee; */
+    max-height: 400px;
+    min-width: 320px;
+}

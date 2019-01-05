@@ -13,6 +13,8 @@
     "webpack-dev-server": "^3.1.14"
   },
   "devDependencies": {
+    "boostrap": "^2.0.0",
+    "bootstrap": "^4.2.1",
     "css-loader": "^2.1.0",
     "style-loader": "^0.23.1",
     "to-string-loader": "^1.1.5",

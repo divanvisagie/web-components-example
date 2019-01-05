@@ -1,16 +1,29 @@
 import { html,render } from 'lit-html'
 
+function createComponent(name, htmlElement) {
+    if (!window.customElements.get(name)) {
+        window.customElements.define(name, htmlElement)
+    }
+    return html`
+        <${name}></${name}>
+    `
+}
+
+
 export class Component extends HTMLElement {
-    constructor(css) {
+    constructor() {
         super()
         this.root = this.attachShadow({
-           mode: 'open'
+            mode: 'open'
         })
+    }
+
+    set css(css) {
         this.styleTag = html`
             <style type="text/css" media="screen">
                 ${css}
             </style>
-        `
+            `
     }
 
     render(props) {
@@ -35,4 +48,10 @@ export class Component extends HTMLElement {
     connectedCallback() {
         this.performRender()
     }
+}
+
+
+export default Component
+export {
+    createComponent
 }
