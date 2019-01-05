@@ -10,7 +10,6 @@ export default createComponent('login-form', class extends Component {
 
     constructor(){
         super()
-        // this.css = milligram
 
         this.state =  {
             username: '',

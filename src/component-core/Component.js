@@ -4,9 +4,7 @@ function createComponent(name, htmlElement) {
     if (!window.customElements.get(name)) {
         window.customElements.define(name, htmlElement)
     }
-    return html`
-        <${name}></${name}>
-    `
+    return document.createElement(name)
 }
 
 

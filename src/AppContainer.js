@@ -3,7 +3,7 @@ import { Component } from './component-core/Component'
 
 import css from './AppContainer.css'
 import milligram from 'milligram'
-import './pages/login-page'
+import LoginPage from './pages/login-page'
 
 
 class Router {
@@ -48,7 +48,7 @@ class AppContainer extends Component {
         return html`
             <div>
 
-                <login-page></login-page>
+                ${LoginPage}
 
             </div>
         `
