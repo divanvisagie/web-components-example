@@ -4,24 +4,8 @@ import { Component } from './component-core/Component'
 import css from './app-container.css'
 import milligram from 'milligram'
 import LoginPage from './pages/login-page'
-
-
-class Router {
-    constructor() {
-        const path = this.getRoute()
-        console.log('current path', path)
-        window.addEventListener('hashchange', (e) => {
-            const path = this.getRoute()
-            console.log('changing to path', path)
-        })
-    }
-
-    getRoute() {
-        return window.location.hash.replace('#','')
-    }
-
-}
-
+import HomePage from './pages/home-page'
+import { Router, Route } from './component-core/Router';
 
 
 class AppContainer extends Component {
@@ -29,11 +13,25 @@ class AppContainer extends Component {
         super()
         this.state = {
             appName: 'Hello',
-            name: ''
+            name: '',
+            page: HomePage
         }
         this.css = css
 
-        const router = new Router()
+        const router = new Router({
+            '/': new Route(HomePage, true),
+            '/login': new Route(LoginPage)
+        })
+        router.onAuthChallenge(e => {
+            return true
+        })
+        router.onChange(e => {
+            console.log('changing to page')
+            this.setState({
+                page: router.getPage()
+            })
+        })
+        
     }
 
     handleInputChange(event) {
@@ -43,13 +41,11 @@ class AppContainer extends Component {
         console.log(css)
     }
 
-    render({appName, name}) {
+    render({appName, name, page}) {
         console.log('render')
         return html`
             <div>
-
-                ${LoginPage}
-
+                ${page}
             </div>
         `
     }
