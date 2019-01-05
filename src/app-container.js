@@ -22,7 +22,7 @@ class AppContainer extends Component {
             page: HomePage
         }
 
-        const router = new Router({
+        window.router = new Router({
             '/': new Route(HomePage, true),
             '/login': new Route(LoginPage)
         })

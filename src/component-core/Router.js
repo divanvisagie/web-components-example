@@ -12,7 +12,6 @@ export class Router {
         this.routes = routes;
         const path = this.getRoute();
         console.log('current path', path);
-        this.path = path;
         window.addEventListener('hashchange', (e) => {
             const path = this.getRoute();
             console.log('changing to path', path);
@@ -25,13 +24,20 @@ export class Router {
     onAuthChallenge(callback) {
         this.authChallengeCallback = callback
     }
+    redirect(path) {
+        console.log('redirecting to', path)
+        window.location.hash = path
+        this.changeCallback()
+    }
     getPage() {
-        const path = this.path;
+        const path = this.getRoute();
+        console.log('getting page for path', path)
         const route = this.routes[path] || this.routes['/'];
         if (route.requiresAuth) {
             const auth = this.authChallengeCallback()
             if (auth) return route.element
             else {
+                console.warn('failed auth, heading back to login')
                 window.location.hash = '#/login'
             }
             return this.routes['/login'].element

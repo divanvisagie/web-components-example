@@ -5,6 +5,7 @@ import css from './login-form.css'
 import bs from '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
 import { html } from 'lit-html'
+import createLoginService from '../services/loginService';
 
 export default createComponent('login-form', class extends Component {
 
@@ -17,6 +18,8 @@ export default createComponent('login-form', class extends Component {
         }
 
         this.css = bs + css
+
+        this.loginService = createLoginService()
     }
 
     
@@ -28,6 +31,7 @@ export default createComponent('login-form', class extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        this.loginService.performLogin(this.state)
         console.log('there was a submission')
     }
 

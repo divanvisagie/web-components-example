@@ -21,10 +21,19 @@ export default createComponent('header-component', class extends Component {
         })
     }
 
+    handleLogout(e) {
+        console.log('logout')
+        this.authService.setAuthentication(false)
+        window.router.redirect('/')
+    }
+
     renderAuthenticated() {
-        return html`<div>
-            Secure Header
-        </div>`
+        return html`<header class="header">
+            <a href="#/">
+                <span>Component Website</span>
+            </a>
+            <a href="#/" @click=${e => this.handleLogout(e)}>Logout</a>
+    </header>`
     }
 
     renderUnAuthenticated() {
